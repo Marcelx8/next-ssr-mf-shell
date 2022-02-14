@@ -3,7 +3,7 @@
   "scripts": {
     "dev": "webpack --config serverContainer.webpack.js && node server.js",
     "build": "webpack --config serverContainer.webpack.js && next build",
-    "start": "NODE_ENV=production node server.js",
+    "start": "set NODE_ENV=production && node server.js",
     "lint": "next lint"
   },
   "dependencies": {
