@@ -1,13 +1,16 @@
 import dynamic from 'next/dynamic';
-const PageImport = import('../real-pages/shell')
-const Page = dynamic(() => PageImport)
-const Wrapper = (props: any) => {
-  return <Page {...props}></Page>
-}
-Wrapper.getInitialProps = async (ctx: any) => {
-  const gip = (await PageImport).default
-  {/* @ts-ignore */}
-    return gip.getInitialProps(ctx)
-  }
 
-  export default Wrapper
+const Shell = dynamic(() => import('../real-pages/shell'));
+
+// @ts-ignore
+Shell.getInitialProps = async (ctx: any) => {
+  const shellImport = import('../real-pages/shell')
+
+  const getInitialProps = (await shellImport).default?.getInitialProps;
+  if (getInitialProps) {
+    return getInitialProps(ctx)
+  }
+  return {}
+}
+
+export default Shell
