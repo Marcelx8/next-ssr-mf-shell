@@ -7,7 +7,7 @@ module.exports = {
   mode: "development",
   devtool: "hidden-source-map",
   output: {
-    path: path.resolve(".next/cache"),
+    path: path.resolve(".next/cache/customServer"),
   },
   externals: ["next"],
   resolve: {
