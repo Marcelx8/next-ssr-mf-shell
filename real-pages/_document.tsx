@@ -10,7 +10,6 @@ class MyDocument extends Document {
   }
 
   render() {
-    console.log('A :::')
     return (
       <Html>
         <ExtendedHead>
