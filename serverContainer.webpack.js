@@ -12,6 +12,8 @@ module.exports = {
   externals: ["next"],
   resolve: {
     extensions: [
+      ".tsx",
+      ".ts",
       ".jsx",
       ".js",
       ".json",

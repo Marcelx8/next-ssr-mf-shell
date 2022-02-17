@@ -3,11 +3,20 @@ import App from 'next/app';
 import { ChakraProvider } from '@chakra-ui/react'
 import theme from '../theme/theme'
 
-const MyApp = ({ Component, pageProps }: AppProps) => {
+import loadNavData from "../data/nav";
+import type { NavData } from '../data/nav';
+import Nav from '../components/Nav'
+
+interface MyAppProps extends AppProps {
+  navData: NavData
+}
+
+const MyApp = ({ Component, pageProps, navData }: MyAppProps) => {
 
   return (
     <>
       <ChakraProvider resetCSS={true} theme={theme}>
+        {navData && <Nav navItems={navData.navItems} />}
         <Component {...pageProps} />
       </ChakraProvider>
     </>
@@ -15,14 +24,15 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
 }
 
 MyApp.getInitialProps = async (appContext: AppContext) => {
-  const [appProps] = await Promise.all([
+  const [appProps, navData] = await Promise.all([
     App.getInitialProps(appContext),
+    loadNavData()
   ]);
 
-  const props = { ...appProps };
+  const props = { ...appProps, navData };
 
   if (typeof window === "undefined") {
-    if (appContext.ctx.res) {
+    if(appContext?.ctx?.res) {
       appContext.ctx.res.setHeader(
         "Cache-Control",
         "s-maxage=1, stale-while-revalidate"
@@ -33,4 +43,4 @@ MyApp.getInitialProps = async (appContext: AppContext) => {
   return props;
 };
 
-export default MyApp
+export default MyApp;
