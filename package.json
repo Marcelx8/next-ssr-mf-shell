@@ -2,7 +2,7 @@
   "name": "shell",
   "scripts": {
     "dev": "webpack --config serverContainer.webpack.js && node server.js",
-    "build": "webpack --config serverContainer.webpack.js && next build",
+    "build": "webpack --config serverContainer.webpack.js && next build && cp -a .next/cache/customServer .next/server",
     "start": "set NODE_ENV=production && node server.js",
     "lint": "next lint"
   },
