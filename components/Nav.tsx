@@ -1,4 +1,5 @@
 import NextLink from "next/link"
+import React from "react";
 import {
   Box,
   Flex,
@@ -30,26 +31,31 @@ export type NavProps = {
   navItems: NavItem[];
 };
 
-export default function WithSubnavigation({ navItems }: NavProps) {
+export default function WithSubnavigation({ navItems }: {navItems: NavItem[] | undefined}) {
   const { isOpen, onToggle } = useDisclosure();
+  const bgColor = useColorModeValue('white', 'gray.800');
+  const textColor = useColorModeValue('gray.600', 'white');
+  const headingTextColor = useColorModeValue('gray.800', 'white');
+  const borderColor = useColorModeValue('gray.200', 'gray.900');
+  const headingTextBreakpoint = useBreakpointValue({ base: 'center', md: 'left' });
 
   if(!navItems) {
     return (
-      <div>UI-NAV</div>
+      <div>No Nav items</div>
     )
   }
 
   return (
     <Box>
       <Flex
-        bg={useColorModeValue('white', 'gray.800')}
-        color={useColorModeValue('gray.600', 'white')}
+        bg={bgColor}
+        color={textColor}
         minH={'60px'}
         py={{ base: 2 }}
         px={{ base: 4 }}
         borderBottom={1}
         borderStyle={'solid'}
-        borderColor={useColorModeValue('gray.200', 'gray.900')}
+        borderColor={borderColor}
         align={'center'}>
         <Flex
           flex={{ base: 1, md: 'auto' }}
@@ -66,10 +72,10 @@ export default function WithSubnavigation({ navItems }: NavProps) {
         </Flex>
         <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }}>
           <Text
-            textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
+            variant={headingTextBreakpoint}
             fontFamily={'heading'}
             fontWeight={'bold'}
-            color={useColorModeValue('gray.800', 'white')}>
+            color={headingTextColor}>
             App
           </Text>
 
@@ -141,6 +147,7 @@ const DesktopNav = ({ navItems }: NavProps) => {
 };
 
 const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
+  const linkHoverBg = useColorModeValue('pink.50', 'gray.900')
   return (
     <NextLink href={href} passHref>
       <Link
@@ -148,7 +155,7 @@ const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
         display={'block'}
         p={2}
         rounded={'md'}
-        _hover={{ bg: useColorModeValue('pink.50', 'gray.900') }}>
+        _hover={{ bg: linkHoverBg }}>
         <Stack direction={'row'} align={'center'}>
           <Box>
             <Text
@@ -176,9 +183,10 @@ const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
 };
 
 const MobileNav = ({ navItems }: NavProps) => {
+  const bgColor = useColorModeValue('white', 'gray.800');
   return (
     <Stack
-      bg={useColorModeValue('white', 'gray.800')}
+      bg={bgColor}
       p={4}
       display={{ md: 'none' }}>
       {navItems.map((navItem) => (
@@ -190,6 +198,8 @@ const MobileNav = ({ navItems }: NavProps) => {
 
 const MobileNavItem = ({ label, children, href }: NavItem) => {
   const { isOpen, onToggle } = useDisclosure();
+  const textColor = useColorModeValue('gray.600', 'gray.200');
+  const borderColor = useColorModeValue('gray.200', 'gray.700');
 
   return (
     <Stack spacing={4} onClick={children && onToggle}>
@@ -204,7 +214,7 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
         }}>
         <Text
           fontWeight={600}
-          color={useColorModeValue('gray.600', 'gray.200')}>
+          color={textColor}>
           {label}
         </Text>
         {children && (
@@ -224,7 +234,7 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
           pl={4}
           borderLeft={1}
           borderStyle={'solid'}
-          borderColor={useColorModeValue('gray.200', 'gray.700')}
+          borderColor={borderColor}
           align={'start'}>
           {children &&
             children.map((child) => (
