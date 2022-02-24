@@ -1,10 +1,18 @@
 
 const { withFederatedSidecar } = require('@module-federation/nextjs-ssr');
 const withPlugins = require('next-compose-plugins');
+// const withTM = require('next-transpile-modules')([
+//   '@chakra-ui/react',
+//   '@chakra-ui/icons',
+//   '@chakra-ui/theme-tools',
+//   '@emotion/react',
+//   '@emotion/styled',
+// ])
+
 
 const name = 'shell';
 const exposes = {
-  './other': './pages/other.tsx',
+  './other': './real-pages/other.tsx',
   './pages-map': './pages-map.ts',
 };
 const remotes = (isServer) => {
@@ -45,6 +53,7 @@ const nextConfig = {
 
 module.exports = withPlugins(
   [
+    // withTM({}),
     withFederatedSidecar({
       name,
       filename: 'static/chunks/remoteEntry.js',
@@ -68,38 +77,22 @@ module.exports = withPlugins(
         //   requiredVersion: false,
         //   singleton: true,
         // },
-        // '@chakra-ui/react': {
-        //   requiredVersion: false,
-        //   singleton: true,
-        // },
-        // '@chakra-ui/server': {
-        //   requiredVersion: false,
-        //   singleton: true,
-        // },
-        // '@chakra-ui/theme-tools': {
-        //   requiredVersion: false,
-        //   singleton: true,
-        // },
-        // '@chakra-ui/icons': {
-        //   requiredVersion: false,
-        //   singleton: true,
-        // },
-        // '@emotion/react': {
-        //   requiredVersion: false,
-        //   singleton: true,
-        // },
-        // '@emotion/styled': {
-        //   requiredVersion: false,
-        //   singleton: true,
-        // },
-        // 'framer-motion': {
-        //   requiredVersion: false,
-        //   singleton: true,
-        // },
-        // sass: {
-        //   requiredVersion: false,
-        //   singleton: true,
-        // },
+        '@chakra-ui/react': {
+          requiredVersion: false,
+          singleton: true,
+        },
+        '@chakra-ui/theme-tools': {
+          requiredVersion: false,
+          singleton: true,
+        },
+        '@chakra-ui/icons': {
+          requiredVersion: false,
+          singleton: true,
+        },
+        sass: {
+          requiredVersion: false,
+          singleton: true,
+        },
       },
     },
     {
@@ -107,7 +100,7 @@ module.exports = withPlugins(
         flushChunks: true,
         hot: true,
       },
-    }),
+    })
   ],
   nextConfig
 );
