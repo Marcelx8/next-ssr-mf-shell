@@ -19,7 +19,7 @@ class MyDocument extends Document {
         <ExtendedHead>
           <meta name="robots" content="noindex" />
           {/* @ts-ignore*/}
-          {this.props.remoteChunks}
+          {Object.values(this.props.remoteChunks)}
         </ExtendedHead>
         <body>
           <Main />
