@@ -7,7 +7,7 @@ const FederatedStatsPlugin = require('webpack-federated-stats-plugin');
 
 const name = 'shell';
 const exposes = {
-  './shell': './pages/shell.tsx',
+  './shell': './real-pages/shell.tsx',
   './pages-map': './pages-map.ts',
 };
 // this enables you to use import() and the webpack parser

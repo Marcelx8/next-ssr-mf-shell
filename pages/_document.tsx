@@ -1,14 +1,15 @@
-import Document, { Html, Main, NextScript, DocumentContext } from "next/document";
+import Document, { Html,Head, Main, NextScript, DocumentContext } from "next/document";
 import React from "react";
 import { flushChunks, ExtendedHead, revalidate } from "@module-federation/nextjs-ssr/flushChunks";
 
 class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
-    const initialProps = await Document.getInitialProps(ctx);
-    revalidate();
+      revalidate();
+      const remotes = await flushChunks(process.env.REMOTES);
+      const initialProps = await Document.getInitialProps(ctx);
     return {
       ...initialProps,
-      remoteChunks: await flushChunks(process.env.REMOTES)
+      remoteChunks: remotes
     };
   }
 
@@ -16,11 +17,11 @@ class MyDocument extends Document {
 
     return (
       <Html>
-        <ExtendedHead>
+        <Head>
           <meta name="robots" content="noindex" />
           {/* @ts-ignore*/}
           {Object.values(this.props.remoteChunks)}
-        </ExtendedHead>
+        </Head>
         <body>
           <Main />
           <NextScript />

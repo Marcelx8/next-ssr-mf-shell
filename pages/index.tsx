@@ -1,10 +1,12 @@
 import dynamic from 'next/dynamic';
 
-const Index = dynamic(() => import('../real-pages/index'));
+// @ts-ignore
+const Index = dynamic(() => import('home/home'));
 
 // @ts-ignore
 Index.getInitialProps = async (ctx: any) => {
-  const indexImport = import('../real-pages/index')
+  // @ts-ignore
+  const indexImport = import('home/home')
 
   const getInitialProps = (await indexImport).default?.getInitialProps;
   if (getInitialProps) {
