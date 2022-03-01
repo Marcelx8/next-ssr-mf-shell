@@ -1,7 +1,6 @@
 import React from "react";
 import Document, { Html, Main, NextScript, DocumentContext, DocumentInitialProps } from "next/document";
 import { flushChunks, ExtendedHead, revalidate, DevHotScript } from "@module-federation/nextjs-ssr/flushChunks";
-import { ColorModeScript } from '@chakra-ui/react'
 
 export type MyDocumentInitialProps = DocumentInitialProps & {
   remoteChunks: Promise<any[]>
@@ -17,6 +16,7 @@ class MyDocument extends Document<MyDocumentInitialProps> {
     //     }, 50)
     //   })
     // });
+
     revalidate()
 
     const remoteChunks = await flushChunks(process.env.REMOTES);
@@ -38,7 +38,7 @@ class MyDocument extends Document<MyDocumentInitialProps> {
         </ExtendedHead>
         <DevHotScript />
         <body>
-          <ColorModeScript />
+          {/* <ColorModeScript /> */}
           <Main />
           <NextScript />
         </body>

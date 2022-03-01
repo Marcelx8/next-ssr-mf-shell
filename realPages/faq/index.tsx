@@ -2,7 +2,7 @@ import type { NextPage } from 'next'
 import React from 'react'
 import Head from 'next/head'
 
-// import Title from '../../components/Title'
+import Title from 'ui/Title'
 
 const Faq: NextPage = ({ data }: any) => {
 
@@ -14,7 +14,7 @@ const Faq: NextPage = ({ data }: any) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        {/* <Title text="FAQ" /> */}
+        <Title text="FAQ" />
         {data && <h3><span style={{ fontWeight: 'bold' }}>Data from API:</span> {JSON.stringify(data)}</h3>}
       </main>
     </>

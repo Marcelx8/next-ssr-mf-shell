@@ -1,18 +1,17 @@
 import type { AppContext, AppProps } from 'next/app';
 import App from 'next/app';
-import React, { useEffect, useState } from 'react';
-import { ChakraProvider, Theme } from '@chakra-ui/react';
-import theme from '../styles/index';
-import remotes from '../remotes'
-
-import type { NavItem } from "../data/nav";
-
-// import Nav from '../components/Nav'
-// import Nav from 'ui/Nav'
+import React from 'react';
 import dynamic from 'next/dynamic';
-const Nav = dynamic(() => import('ui/Nav'))
-
+// @ts-ignore
+import ThemeProvider from 'ui/ThemeProvider';
 import { createServerContext, createBroswerContext } from "use-sse";
+import remotes from '../remotes'
+// @ts-ignore
+import theme from 'ui/theme';
+import type { NavItem } from "../data/nav";
+const Nav = dynamic(() => import('ui/Nav'))
+// import Nav from 'ui/Nav'
+
 let DataContext: any;
 let dataResolver: any;
 if (!process.browser) {
@@ -39,10 +38,11 @@ const MyApp = ({ Component, pageProps, navItems }: MyAppProps) => {
   return (
     <>
       <DataContext>
-        <ChakraProvider resetCSS theme={theme}>
+        <ThemeProvider resetCSS theme={theme}>
+          {/* @ts-ignore */}
           <Nav navItems={navItems} />
           <Component {...pageProps} />
-        </ChakraProvider>
+        </ThemeProvider>
       </DataContext>
     </>
   )
@@ -53,11 +53,11 @@ MyApp.getInitialProps = async (appContext: AppContext) => {
     App.getInitialProps(appContext),
     typeof window !== "undefined"
       // @ts-ignore
-      ? __NEXT_DATA__.props.navData
+      ? __NEXT_DATA__.props.navItems
       : fetch(`${remotes.shell.apiPath}/nav`).then((res) => {
         return res.json()
       }),
-      {}
+    {}
   ]);
 
   const props = { ...appProps, navItems, SSE };
