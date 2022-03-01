@@ -17,11 +17,11 @@ class MyDocument extends Document {
 
     return (
       <Html>
-        <Head>
+        <ExtendedHead>
           <meta name="robots" content="noindex" />
           {/* @ts-ignore*/}
           {Object.values(this.props.remoteChunks)}
-        </Head>
+        </ExtendedHead>
         <body>
           <Main />
           <NextScript />
