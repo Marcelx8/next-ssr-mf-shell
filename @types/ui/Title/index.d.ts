@@ -1,7 +1,6 @@
 import React, {ReactElement} from "react";
-import { Heading, HeadingProps } from '@chakra-ui/react';
 
-type TitleProps = HeadingProps & {
+type TitleProps = {
   text: string
 }
 

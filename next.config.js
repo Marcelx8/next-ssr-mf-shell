@@ -4,7 +4,7 @@ const withPlugins = require('next-compose-plugins');
 const name = 'shell';
 const exposes = {
   './home': './realPages/index.tsx',
-  './food': './realPages/foo.tsx',
+  './foo': './realPages/foo.tsx',
   './faq': './realPages/faq/index.tsx',
   './faqDetails': './realPages/faq/[slug].tsx',
   './pages-map': './pages-map.ts',
@@ -18,6 +18,9 @@ const remotes = (isServer) => {
 };
 
 const nextConfig = {
+  // compiler: {
+  //   styledComponents: true,
+  // },
 
   webpack(config, options) {
     const { webpack, isServer } = options;

@@ -1,11 +1,16 @@
 import dynamic from "next/dynamic";
+import { NextPage } from "next/types";
+
 //@ts-ignore
-const Page = dynamic(() => import("ui/ui"));
-//@ts-ignore
-Page.getInitialProps = async (ctx) => {
+const page = import("ui/ui");
+
+const Page: NextPage = dynamic(() =>
   //@ts-ignore
-  const page = import("ui/ui");
-  const getInitialProps = (await page).default?.getInitialProps;
+  import("ui/ui")
+);
+
+Page.getInitialProps = async (ctx) => {
+  const getInitialProps = (await page)?.default?.getInitialProps;
   if (getInitialProps) {
     return getInitialProps(ctx);
   }

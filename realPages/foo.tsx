@@ -4,10 +4,10 @@ import Head from 'next/head'
 import dynamic from 'next/dynamic'
 
 // import Title from '../components/Title'
-// import Title from 'ui/Title'
+import Title from 'ui/Title'
 // const Title = dynamic(() => import('ui/Title'))
 
-const Home: NextPage = ({ data }: any) => {
+const Foo: NextPage = ({ data }: any) => {
 
   return (
     <>
@@ -17,17 +17,17 @@ const Home: NextPage = ({ data }: any) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        {/* <Title text="Foo" /> */}
+        <Title text="Foo" />
         {data && <h3><span style={{ fontWeight: 'bold', color: 'red' }}>Data from API:</span> {JSON.stringify(data)}</h3>}
       </main>
     </>
   )
 }
 
-Home.getInitialProps = async () => {
+Foo.getInitialProps = async () => {
   const res = await fetch('https://jsonplaceholder.typicode.com/todos/1');
   const data = await res.json();
   return { data };
 }
 
-export default Home
+export default Foo
