@@ -1,27 +1,44 @@
-import Document, { Html, Main, NextScript, DocumentContext } from "next/document";
 import React from "react";
-import { flushChunks, ExtendedHead, revalidate } from "@module-federation/nextjs-ssr/flushChunks";
+import Document, { Html, Main, NextScript, DocumentContext, DocumentInitialProps } from "next/document";
+import { flushChunks, ExtendedHead, revalidate, DevHotScript } from "@module-federation/nextjs-ssr/flushChunks";
+import { ColorModeScript } from '@chakra-ui/react'
 
-class MyDocument extends Document {
-  static async getInitialProps(ctx: DocumentContext) {
+export type MyDocumentInitialProps = DocumentInitialProps & {
+  remoteChunks: Promise<any[]>
+}
+
+class MyDocument extends Document<MyDocumentInitialProps> {
+  static async getInitialProps(ctx: DocumentContext): Promise<MyDocumentInitialProps> {
+
+    // ctx?.res?.on("finish", () => {
+    //   revalidate().then(() => {
+    //     setTimeout(() => {
+    //       process.exit(1)
+    //     }, 50)
+    //   })
+    // });
+    revalidate()
+
+    const remoteChunks = await flushChunks(process.env.REMOTES);
     const initialProps = await Document.getInitialProps(ctx);
-    revalidate();
+
     return {
       ...initialProps,
-      remoteChunks: await flushChunks(process.env.REMOTES)
-    };
+      remoteChunks,
+    }
+
   }
 
   render() {
-
     return (
       <Html>
         <ExtendedHead>
           <meta name="robots" content="noindex" />
-          {/* @ts-ignore*/}
-          {this.props.remoteChunks}
+          {Object.values(this.props.remoteChunks)}
         </ExtendedHead>
+        <DevHotScript />
         <body>
+          <ColorModeScript />
           <Main />
           <NextScript />
         </body>

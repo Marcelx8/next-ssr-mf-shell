@@ -1,3 +1,6 @@
 export default {
-  "/shell": "./shell",
+  "/": "./home",
+  "/foo": "./foo",
+  "/faq": "./faq",
+  "/faq/*": "./faqDetails",
 }
