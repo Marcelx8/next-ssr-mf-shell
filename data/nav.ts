@@ -16,16 +16,16 @@ const loadNavData = async (): Promise<NavItem[]> => {
       href: "/",
     },
     {
-      label: "Other",
-      href: "/other",
-    },
-    {
-      label: "Login",
-      href: "/login",
-    },
-    {
       label: "UI",
       href: "/ui",
+    },
+    {
+      label: "FAQ",
+      href: "/faq",
+    },
+    {
+      label: "Foo",
+      href: "/foo",
     },
   ];
 

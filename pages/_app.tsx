@@ -1,6 +1,10 @@
 import dynamic from "next/dynamic";
-const page = import("../real-pages/_app");
-const App = dynamic(() => import("../real-pages/_app"));
+const page = import("../realPages/_app");
+// @ts-ignore
+import '../styles/globals.scss'
+
+const App = dynamic(() => import("../realPages/_app"));
+
 // @ts-ignore
 App.getInitialProps = async (ctx: any) => {
   const getInitialProps = (await page).default?.getInitialProps;

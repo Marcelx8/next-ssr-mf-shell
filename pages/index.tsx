@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic';
-const page = import('../real-pages/index')
+const page = import('../realPages/index')
 
-const Page = dynamic(() => import('../real-pages/index'))
+const Page = dynamic(() => import('../realPages/index'))
 // @ts-ignore
 Page.getInitialProps = async (ctx: any) => {
   const getInitialProps = (await page).default?.getInitialProps;
@@ -12,17 +12,3 @@ Page.getInitialProps = async (ctx: any) => {
 }
 
 export default Page
-
-// import dynamic from "next/dynamic";
-// const Page = dynamic(() => import("home/home"));
-// // @ts-ignore
-// Page.getInitialProps = async (ctx) => {
-//   const page = import("home/home");
-//   // @ts-ignore
-//   const getInitialProps = (await page).default?.getInitialProps;
-//   if (getInitialProps) {
-//     return getInitialProps(ctx);
-//   }
-//   return {};
-// };
-// export default Page;

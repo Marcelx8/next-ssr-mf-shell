@@ -1,3 +1,6 @@
 export default {
-  "/other": "./other",
+  "/": "./home",
+  "/foo": "./foo",
+  "/faq": "./faq",
+  "/faq/*": "./faqDetails",
 }
