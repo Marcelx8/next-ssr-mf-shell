@@ -1,15 +1,14 @@
 import type { NextPage } from 'next'
-import React from 'react'
 import Head from 'next/head'
 
-import HomeTitle from '../components/Title'
+// import HomeTitle from '../components/Title'
 import Title from 'ui/Title'
-import Counter from 'ui/Counter'
-import useStore from 'ui/store'
+// import Counter from 'ui/Counter'
+// import useStore from 'ui/store'
 
 const Home: NextPage = ({ data }: any) => {
 
-  const {count, increment, decrement} = useStore()
+  // const {count, increment, decrement} = useStore()
 
   return (
     <>
@@ -19,9 +18,9 @@ const Home: NextPage = ({ data }: any) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <HomeTitle text="Home" />
+        {/* <HomeTitle text="Home" /> */}
         <Title text="Home" />
-        <Counter count={count} onIncrement={increment} onDecrement={decrement} />
+        {/* <Counter count={count} onIncrement={increment} onDecrement={decrement} /> */}
         {data && <h3><span style={{ fontWeight: 'bold' }}>Data from API:</span> {JSON.stringify(data)}</h3>}
       </main>
     </>

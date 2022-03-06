@@ -3,8 +3,8 @@ const page = import('../realPages/[...slug]')
 
 const Page = dynamic(() => import('../realPages/[...slug]'));
 // @ts-ignore
-Page.getInitialProps = async (ctx: any) => {
-  const getInitialProps = (await page).default?.getInitialProps;
+Page.getInitialProps = async (ctx) => {
+  const getInitialProps = (await page)?.default?.getInitialProps;
   if (getInitialProps) {
     return getInitialProps(ctx)
   }

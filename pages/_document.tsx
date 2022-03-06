@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import Document, { Html, Main, NextScript, DocumentContext, DocumentInitialProps } from "next/document";
 import { flushChunks, ExtendedHead, revalidate, DevHotScript } from "@module-federation/nextjs-ssr/flushChunks";
 
@@ -9,15 +9,15 @@ export type MyDocumentInitialProps = DocumentInitialProps & {
 class MyDocument extends Document<MyDocumentInitialProps> {
   static async getInitialProps(ctx: DocumentContext): Promise<MyDocumentInitialProps> {
 
-    // ctx?.res?.on("finish", () => {
-    //   revalidate().then(() => {
-    //     setTimeout(() => {
-    //       process.exit(1)
-    //     }, 50)
-    //   })
-    // });
-
-    revalidate()
+    ctx?.res?.on("finish", () => {
+      revalidate().then(() => {
+        if (process.env.NODE_ENV === "development") {
+          setTimeout(() => {
+            process.exit(1);
+          }, 50);
+        }
+      });
+    });
 
     const remoteChunks = await flushChunks(process.env.REMOTES);
     const initialProps = await Document.getInitialProps(ctx);

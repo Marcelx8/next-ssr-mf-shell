@@ -1,8 +1,8 @@
-import loadNavData from "../../data/nav";
+import navData from "../../data/nav";
 
 export default async function nav(req: any, res: any) {
   try {
-    res.json(await loadNavData());
+    res.json(navData);
   } catch (err) {
     console.error(err);
     res.status(500);

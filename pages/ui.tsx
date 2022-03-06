@@ -1,5 +1,5 @@
+import { NextPage } from 'next/types';
 import dynamic from "next/dynamic";
-import { NextPage } from "next/types";
 
 //@ts-ignore
 const page = import("ui/ui");

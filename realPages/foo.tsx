@@ -7,7 +7,7 @@ import dynamic from 'next/dynamic'
 import Title from 'ui/Title'
 // const Title = dynamic(() => import('ui/Title'))
 
-const Foo: NextPage = ({ data }: any) => {
+const Foo: NextPage = () => {
 
   return (
     <>
@@ -18,16 +18,16 @@ const Foo: NextPage = ({ data }: any) => {
       </Head>
       <main>
         <Title text="Foo" />
-        {data && <h3><span style={{ fontWeight: 'bold', color: 'red' }}>Data from API:</span> {JSON.stringify(data)}</h3>}
+        {/* {data && <h3><span style={{ fontWeight: 'bold', color: 'red' }}>Data from API:</span> {JSON.stringify(data)}</h3>} */}
       </main>
     </>
   )
 }
 
 Foo.getInitialProps = async () => {
-  const res = await fetch('https://jsonplaceholder.typicode.com/todos/1');
-  const data = await res.json();
-  return { data };
+  // const res = await fetch('https://jsonplaceholder.typicode.com/todos/1');
+  // const data = await res.json();
+  return { };
 }
 
 export default Foo

@@ -3,7 +3,7 @@ const page = import('../../realPages/faq')
 
 const Page = dynamic(() => import('../../realPages/faq'))
 // @ts-ignore
-Page.getInitialProps = async (ctx: any) => {
+Page.getInitialProps = async (ctx) => {
   const getInitialProps = (await page).default?.getInitialProps;
   if (getInitialProps) {
     return getInitialProps(ctx)

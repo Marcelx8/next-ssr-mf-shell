@@ -6,7 +6,7 @@ const exposes = {
   './home': './realPages/index.tsx',
   './foo': './realPages/foo.tsx',
   './faq': './realPages/faq/index.tsx',
-  './faqDetails': './realPages/faq/[slug].tsx',
+  './faqDetails': './realPages/faq/[...slug].tsx',
   './pages-map': './pages-map.ts',
 };
 const remotes = (isServer) => {
@@ -45,10 +45,6 @@ module.exports = withPlugins(
           lodash: {
             import: 'lodash',
             requiredVersion: require('lodash').version,
-            singleton: true,
-          },
-          'react': {
-            requiredVersion: false,
             singleton: true,
           },
           'use-sse': {
