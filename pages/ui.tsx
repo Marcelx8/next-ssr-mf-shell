@@ -1,19 +1,22 @@
-import { NextPage } from 'next/types';
-import dynamic from "next/dynamic";
+import dynamic from 'next/dynamic';
+// @ts-ignore
+const Page = dynamic(() => import('ui/ui').catch(() => {
+  return new Promise(() => {
+    window.location.reload()
+  })
+}))
 
-//@ts-ignore
-const page = import("ui/ui");
-
-const Page: NextPage = dynamic(() =>
-  //@ts-ignore
-  import("ui/ui")
-);
-
+// @ts-ignore
 Page.getInitialProps = async (ctx) => {
-  const getInitialProps = (await page)?.default?.getInitialProps;
+  // @ts-ignore
+  const page = import('ui/ui').catch(() => {
+    return {}
+  })
+  const getInitialProps = (await page).default?.getInitialProps;
   if (getInitialProps) {
-    return getInitialProps(ctx);
+    return getInitialProps(ctx)
   }
-  return {};
-};
-export default Page;
+  return {}
+}
+
+export default Page

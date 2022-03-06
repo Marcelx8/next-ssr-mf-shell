@@ -59,10 +59,10 @@
     "sort-keys-recursive" "2.1.2"
     "webpack-virtual-modules" "0.4.3"
 
-"@module-federation/nextjs-ssr@^0.0.4-beta.6":
-  "integrity" "sha512-R4krQHtCL3fCNCT+8CBJuKgAYWXcrsRDX+ZMVCAbg8OUeqXKgMU6lPhPrJfTrA+mQQ3O/kkaXwSSZ4w/jfKPSw=="
-  "resolved" "http://r.privjs.com/@module-federation%2fnextjs-ssr/-/nextjs-ssr-0.0.4-beta.6.tgz"
-  "version" "0.0.4-beta.6"
+"@module-federation/nextjs-ssr@^0.0.4-beta.7":
+  "integrity" "sha512-e+qCwJ8TxQSSIcUfyVLLfrxzIF61Sgv0lbCX5+9P6vWR3DMhHMSmjoeqfjNZs4zWHDVECV8VsreuPTjo6lw8QQ=="
+  "resolved" "http://r.privjs.com/@module-federation%2fnextjs-ssr/-/nextjs-ssr-0.0.4-beta.7.tgz"
+  "version" "0.0.4-beta.7"
   dependencies:
     "bytenode" "^1.3.4"
     "chalk" "4.1.2"

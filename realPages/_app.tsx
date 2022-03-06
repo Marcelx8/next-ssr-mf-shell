@@ -1,7 +1,6 @@
 import type { AppContext, AppProps } from 'next/app';
 import App from 'next/app';
-import React, { useEffect, useState } from 'react';
-import dynamic from 'next/dynamic';
+import React from 'react';
 // @ts-ignore
 import ThemeProvider from 'ui/ThemeProvider';
 // @ts-ignore
@@ -35,7 +34,7 @@ MyApp.getInitialProps = async (appContext: AppContext) => {
     // typeof window !== "undefined"
     //   // @ts-ignore
     //   ? __NEXT_DATA__.props.navData
-    //   : fetch(`${remotes.ui.apiPath}/nav`).then((res) => {
+    //   : fetch(`${remotes.shell.apiPath}/nav`).then((res) => {
     //     return res.json()
     //   })
   ]);

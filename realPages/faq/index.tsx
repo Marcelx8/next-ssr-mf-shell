@@ -1,10 +1,12 @@
 import type { NextPage } from 'next'
-import React from 'react'
 import Head from 'next/head'
 
 import Title from 'ui/Title'
+import Counter from 'ui/Counter'
+import useStore from 'ui/store'
 
 const Faq: NextPage = ({ data }: any) => {
+  const {count, increment, decrement} = useStore()
 
   return (
     <>
@@ -15,7 +17,8 @@ const Faq: NextPage = ({ data }: any) => {
       </Head>
       <main>
         <Title text="FAQ" />
-        {data && <h3><span style={{ fontWeight: 'bold' }}>Data from API:</span> {JSON.stringify(data)}</h3>}
+        <Counter count={count} onIncrement={increment} onDecrement={decrement} />
+        {data && <h3><span style={{ fontWeight: 'bold', color: 'green'  }}>Data from API:</span> {JSON.stringify(data, null, 2)}</h3>}
       </main>
     </>
   )

@@ -1,13 +1,12 @@
 import type { NextPage } from 'next'
-import React from 'react'
 import Head from 'next/head'
-import dynamic from 'next/dynamic'
 
-// import Title from '../components/Title'
 import Title from 'ui/Title'
-// const Title = dynamic(() => import('ui/Title'))
+import Counter from 'ui/Counter'
+import useStore from 'ui/store'
 
-const Foo: NextPage = () => {
+const Foo: NextPage = ({data}: any) => {
+  const {count, increment, decrement} = useStore()
 
   return (
     <>
@@ -18,16 +17,17 @@ const Foo: NextPage = () => {
       </Head>
       <main>
         <Title text="Foo" />
-        {/* {data && <h3><span style={{ fontWeight: 'bold', color: 'red' }}>Data from API:</span> {JSON.stringify(data)}</h3>} */}
+        <Counter count={count} onIncrement={increment} onDecrement={decrement} />
+        {data && <h3><span style={{ fontWeight: 'bold', color: 'blue' }}>Data from API:</span> {JSON.stringify(data, null, 2)}</h3>}
       </main>
     </>
   )
 }
 
 Foo.getInitialProps = async () => {
-  // const res = await fetch('https://jsonplaceholder.typicode.com/todos/1');
-  // const data = await res.json();
-  return { };
+  const res = await fetch('https://jsonplaceholder.typicode.com/todos/1');
+  const data = await res.json();
+  return { data };
 }
 
 export default Foo

@@ -14,10 +14,10 @@ const navData: NavItem[] = [
     label: "Home",
     href: "/",
   },
-  {
-    label: "Faq",
-    href: "/faq",
-  },
+  // {
+  //   label: "Faq",
+  //   href: "/faq",
+  // },
   {
     label: "Foo",
     href: "/foo",

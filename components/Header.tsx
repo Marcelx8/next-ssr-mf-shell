@@ -9,7 +9,7 @@ import Nav from 'ui/Nav'
 
 const Header = () => {
   const [items, error] = useSSE(async() => {
-    return loadNavData().then(navItems => navItems)
+    // return loadNavData().then(navItems => navItems)
   }, [])
 
   return (

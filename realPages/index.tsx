@@ -1,14 +1,14 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 
-// import HomeTitle from '../components/Title'
 import Title from 'ui/Title'
-// import Counter from 'ui/Counter'
-// import useStore from 'ui/store'
+import Counter from 'ui/Counter'
+import useStore from 'ui/store'
+import NextLink from 'next/link'
 
-const Home: NextPage = ({ data }: any) => {
+const Home: NextPage = ({data}: any) => {
 
-  // const {count, increment, decrement} = useStore()
+  const {count, increment, decrement} = useStore()
 
   return (
     <>
@@ -18,10 +18,16 @@ const Home: NextPage = ({ data }: any) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        {/* <HomeTitle text="Home" /> */}
+      <div style={{ marginLeft: '2.5rem', marginTop: '1.5rem' }}>
+        <ul>
+          <li>All UI components are consumed within this host from the <NextLink href="/ui"><span style={{fontWeight: 'bold', textDecoration: 'underline', cursor: 'pointer'}}>UI remote</span></NextLink></li>
+          <li>For testing purposes, the UI remote also exposes a Zustand store for keeping the Counter state</li>
+          <li>The UI navigation route consumes and displays the route which is exposed from the UI remote</li>
+        </ul>
+      </div>
         <Title text="Home" />
-        {/* <Counter count={count} onIncrement={increment} onDecrement={decrement} /> */}
-        {data && <h3><span style={{ fontWeight: 'bold' }}>Data from API:</span> {JSON.stringify(data)}</h3>}
+        <Counter count={count} onIncrement={increment} onDecrement={decrement} />
+        {data && <h3><span style={{ fontWeight: 'bold', color: 'red'  }}>Data from API:</span> {JSON.stringify(data, null, 2)}</h3>}
       </main>
     </>
   )

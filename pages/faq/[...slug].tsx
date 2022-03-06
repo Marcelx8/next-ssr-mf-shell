@@ -1,9 +1,17 @@
 import dynamic from 'next/dynamic';
-const page = import('../../realPages/faq/[...slug]')
+//@ts-ignore
+const Page = dynamic(() => import('../../realPages/[...slug]').catch(() => {
+  return new Promise(() => {
+    window.location.reload()
+  })
+}))
 
-const Page = dynamic(() => import('../../realPages/faq/[...slug]'));
 // @ts-ignore
-Page.getInitialProps = async (ctx: any) => {
+Page.getInitialProps = async (ctx) => {
+  const page = import('../../realPages/[...slug]').catch(() => {
+    return {}
+  })
+  //@ts-ignore
   const getInitialProps = (await page).default?.getInitialProps;
   if (getInitialProps) {
     return getInitialProps(ctx)
