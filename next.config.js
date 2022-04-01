@@ -22,6 +22,11 @@ const remotes = (isServer) => {
 };
 
 const nextConfig = {
+  env: {
+    VERCEL: process.env.VERCEL,
+    VERCEL_URL: process.env.VERCEL_URL,
+  },
+
   webpack(config, options) {
     const { webpack, isServer } = options;
     config.module.rules.push({
