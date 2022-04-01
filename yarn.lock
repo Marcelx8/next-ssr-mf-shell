@@ -46,9 +46,9 @@
   resolved "https://registry.npmjs.org/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
-"@module-federation/next-catchall@git+https://github.com/module-federation/next-catchall.git":
+"@module-federation/next-catchall@https://github.com/module-federation/next-catchall.git":
   version "0.0.9"
-  resolved "git+ssh://git@github.com/module-federation/next-catchall.git#a8a6dcdac6a1f6d520aca40843900e150522597f"
+  resolved "https://github.com/module-federation/next-catchall.git#a8a6dcdac6a1f6d520aca40843900e150522597f"
   dependencies:
     "@sentry/browser" "^6.10.0"
     "@sentry/node" "^6.10.0"
