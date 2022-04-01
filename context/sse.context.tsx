@@ -6,7 +6,9 @@ import { createServerContext } from "use-sse";
 import ThemeProvider from 'ui/ThemeProvider';
 // @ts-ignore
 import theme from 'ui/theme';
-import Header from '../components/Header';
+import Nav from 'ui/Nav'
+import useStore from 'ui/store'
+import navItems from '../data/nav';
 import React from "react";
 
 export const { ServerDataContext, resolveData } = createServerContext();
@@ -31,8 +33,8 @@ export async function initialRender(
 
   ReactDOMServer.renderToString(
     <Context>
-      <ThemeProvider theme={theme}>
-        <Header />
+      <ThemeProvider resetCSS theme={theme}>
+        <Nav navItems={navItems} />
         <WithAppContext {...pageProps} />
       </ThemeProvider>
     </Context>

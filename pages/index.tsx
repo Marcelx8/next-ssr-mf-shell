@@ -9,7 +9,9 @@ const Page = dynamic(() => import('../realPages/index').catch(() => {
 // @ts-ignore
 Page.getInitialProps = async (ctx) => {
   const page = import('../realPages/index').catch(() => {
-    return {}
+    return new Promise(() => {
+      window.location.reload()
+    })
   })
   //@ts-ignore
   const getInitialProps = (await page).default?.getInitialProps;

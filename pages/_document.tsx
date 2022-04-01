@@ -1,32 +1,24 @@
 import React from 'react';
-import Document, { Html, Main, NextScript, DocumentContext, DocumentInitialProps } from "next/document";
-import { flushChunks, ExtendedHead, revalidate, DevHotScript } from "@module-federation/nextjs-ssr/flushChunks";
+import Document, { Html, Main, NextScript, DocumentContext, DocumentInitialProps } from 'next/document';
+import { flushChunks, ExtendedHead, revalidate, DevHotScript } from '@module-federation/nextjs-ssr/flushChunks';
 
 export type MyDocumentInitialProps = DocumentInitialProps & {
-  remoteChunks: Promise<any[]>
-}
+  remoteChunks: Promise<any[]>;
+};
 
 class MyDocument extends Document<MyDocumentInitialProps> {
   static async getInitialProps(ctx: DocumentContext): Promise<MyDocumentInitialProps> {
-
-    ctx?.res?.on("finish", () => {
-      revalidate().then(() => {
-        if (process.env.NODE_ENV === "development") {
-          setTimeout(() => {
-            process.exit(1);
-          }, 50);
-        }
-      });
+    ctx?.res?.on('finish', () => {
+      revalidate();
     });
 
-    const remoteChunks = await flushChunks(process.env.REMOTES);
     const initialProps = await Document.getInitialProps(ctx);
+    const remoteChunks = await flushChunks(process.env.REMOTES);
 
     return {
       ...initialProps,
       remoteChunks,
-    }
-
+    };
   }
 
   render() {
@@ -34,11 +26,11 @@ class MyDocument extends Document<MyDocumentInitialProps> {
       <Html>
         <ExtendedHead>
           <meta name="robots" content="noindex" />
+          <link rel="icon" href="/favicon.ico" />
           {Object.values(this.props.remoteChunks)}
         </ExtendedHead>
         <DevHotScript />
-        <body>
-          {/* <ColorModeScript /> */}
+        <body style={{ marginLeft: '1.25rem' }}>
           <Main />
           <NextScript />
         </body>

@@ -7,8 +7,9 @@ export type NavItem = {
 }
 
 export type NavData = {
-  navItems: NavItem[];
+  navItems: NavItem[] | undefined;
+  count?: number
 };
-export type UINav = React.FunctionComponent<{ navItems: NavItem[] | undefined}>;
+export type UINav = React.FunctionComponent<NavProps>;
 const Nav: UINav;
 export default Nav;

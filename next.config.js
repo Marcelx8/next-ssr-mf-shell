@@ -22,11 +22,10 @@ const remotes = (isServer) => {
 };
 
 const nextConfig = {
-
   webpack(config, options) {
     const { webpack, isServer } = options;
     config.module.rules.push({
-      test: /_app.tsx/,
+      test: [/_app.[jt]sx?/, /_document.[jt]sx?/],
       loader: '@module-federation/nextjs-ssr/lib/federation-loader.js',
     });
 
