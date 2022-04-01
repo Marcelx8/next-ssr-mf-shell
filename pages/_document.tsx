@@ -8,8 +8,14 @@ export type MyDocumentInitialProps = DocumentInitialProps & {
 
 class MyDocument extends Document<MyDocumentInitialProps> {
   static async getInitialProps(ctx: DocumentContext): Promise<MyDocumentInitialProps> {
-    ctx?.res?.on('finish', () => {
-      revalidate();
+    ctx?.res?.on("finish", () => {
+      revalidate().then(() => {
+        if (process.env.NODE_ENV === "development") {
+          setTimeout(() => {
+            process.exit(1);
+          }, 50);
+        }
+      });
     });
 
     const initialProps = await Document.getInitialProps(ctx);
